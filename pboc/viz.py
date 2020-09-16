@@ -25,9 +25,10 @@ def despine(ax, offset=2):
          a.spines['bottom'].set_position(('outward', 2))
          a.spines['left'].set_position(('outward', 2))
 
+
 def color_palette():
-    """ 
-    Returns my preferred color scheme 
+    """
+    Return a special color scheme.
     """
     colors = {
         "dark_purple": "#5F2E88",
@@ -60,6 +61,7 @@ def color_palette():
         "light_grey": "#6D6F72",
         "light_gray": "#6D6F72",
     }
+
     palette = [
         v
         for k, v in colors.items()
@@ -69,9 +71,9 @@ def color_palette():
     return colors, palette
 
 
-def phd_style():
+def pyplot_theme():
     """
-    Sets the plotting style to my preference
+    Set the matplotlib.pyplot plotting style.
     """
     rc = {
         "axes.facecolor": "#EFEFEF",
@@ -128,6 +130,9 @@ def phd_style():
 
 
 def bokeh_theme(return_color_list=True):
+    """
+    Set the bokeh plotting style.
+    """
     theme_json = {
         "attrs": {
             "Figure": {"background_fill_color": "#EEEEEE",},
@@ -153,7 +158,7 @@ def bokeh_theme(return_color_list=True):
                 "align": "left",
                 'text_font_style': 'normal',
                 'text_font_size': "10pt",
-                "offset": 5 
+                "offset": 5
             },
         }
     }
@@ -166,9 +171,10 @@ def bokeh_theme(return_color_list=True):
     else:
         return colors
 
+
 def altair_theme():
     """
-    Sets a theme for the plotting library Altair to match the style of my PhD.
+    Set a theme for the plotting library Altair.
     """
 
     colors, palette = color_palette()
@@ -176,8 +182,8 @@ def altair_theme():
         return {
             'config': {
                 'background': 'white',
-                    'group': { 
-                    'fill': 'white', 
+                    'group': {
+                    'fill': 'white',
                     },
                 'view': {
                     'strokeWidth': 0,
@@ -216,7 +222,7 @@ def altair_theme():
                     'titleFontSize': 8,
                     'titleFontWeight': 400
                 },
-                'title' : { 
+                'title' : {
                     'font': 'Myriad Pro',
                     'fontWeight': 400,
                     'fontSize': 8,
@@ -232,7 +238,7 @@ def altair_theme():
 
 def color_selector(style):
     """
-    Select the color palette of your choice.
+    Select the color palette of either PBOC or mutants paper.
 
     Parameters
     ----------
@@ -243,9 +249,9 @@ def color_selector(style):
     Returns
     -------
     colors: dict
-        Dictionary of colors. If "dna", "double", or "inducer" is the selected style,
+        Dictionary of colors. If "mut" is the selected style,
         keys will be the mutants in upper case. Double mutant keys will be DNA-IND. For
-        pboc, the keys will be the typical color descriptors. 
+        pboc, the keys will be the typical color descriptors.
 
     """
     # Ensure the provided style name makes sense.
