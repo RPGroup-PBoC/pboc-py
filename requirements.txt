@@ -1,0 +1,9 @@
+numpy
+pandas
+matplotlib
+bokeh
+scipy
+skimage
+glob
+seaborn
+altair
