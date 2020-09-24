@@ -47,7 +47,7 @@ class MWC(object):
         # Ensure values are provided.
         for k in kwargs.keys():
             if kwargs[k] is None:
-                raise RuntimeError("{0} is NoneType and must be defined.".format(k))
+                raise TypeError("{0} is None and must be defined.".format(k))
 
         # Test input types
         for arg in [ep_ai, ka, ki, effector_conc, n_sites]:
@@ -55,13 +55,13 @@ class MWC(object):
                 pass
             elif type(arg) in [pd.core.series.Series, np.ndarray]:
                 if arg.dtype not in [int, float]:
-                    raise RuntimeError("Argument {} is {}, but elements are not of type into or float.".format(arg, type(arg)))
+                    raise TypeError("Argument {} is {}, but elements are not of type into or float.".format(arg, type(arg)))
         
             elif type(arg) == list:
                 if any([type(a) not in [int, float] for a in arg]):
-                    raise RuntimeError("Argument {} is list, but not all elements are not of type into or float.".format(arg, arg))
+                    raise TypeError("Argument {} is list, but not all elements are not of type into or float.".format(arg))
             else:
-                raise RuntimeError("Argument {} is {}, has to be either int, float or array")
+                raise TypeError("Argument {} is {}, has to be either int, float or array")
                 
 
         # Assign the variables.
@@ -78,8 +78,13 @@ class MWC(object):
         # Ensure ka and ki are not zero.
         if type(ka) is float or int:
             _ka = np.array([ka])
+        else:
+            _ka = ka
+
         if type(ki) is float or int:
             _ki = np.array([ki])
+        else:
+            _ki = ki
 
         if (_ka == 0).any() or (_ki == 0).any():
             raise ValueError("ka and/or ki cannot be zero.")
@@ -93,7 +98,7 @@ class MWC(object):
             if type(val) is float or int:
                 val = np.array([val])
             if (val < 0).any():
-                raise RuntimeError("{0} must be positive.".format(k))
+                raise ValueError("{0} must be positive.".format(k))
 
     def pact(self):
         r"""
