@@ -3,6 +3,7 @@ A module for computing properties of various transcriptional
 regulatory architectures.
 """
 import numpy as np
+import pandas as pd
 import scipy.optimize
 
 
@@ -47,6 +48,21 @@ class MWC(object):
         for k in kwargs.keys():
             if kwargs[k] is None:
                 raise RuntimeError("{0} is NoneType and must be defined.".format(k))
+
+        # Test input types
+        for arg in [ep_ai, ka, ki, effector_conc, n_sites]:
+            if type(arg) in [int, float, np.float_, np.int_]:
+                pass
+            elif type(arg) in [pd.core.series.Series, np.ndarray]:
+                if arg.dtype not in [int, float]:
+                    raise RuntimeError("Argument {} is {}, but elements are not of type into or float.".format(arg, type(arg)))
+        
+            elif type(arg) == list:
+                if any([type(a) not in [int, float] for a in arg]):
+                    raise RuntimeError("Argument {} is list, but not all elements are not of type into or float.".format(arg, arg))
+            else:
+                raise RuntimeError("Argument {} is {}, has to be either int, float or array")
+                
 
         # Assign the variables.
         self.c = effector_conc
