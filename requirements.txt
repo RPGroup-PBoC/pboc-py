@@ -3,7 +3,7 @@ pandas
 matplotlib
 bokeh
 scipy
-skimage
+scikit-image
 glob
 seaborn
 altair
