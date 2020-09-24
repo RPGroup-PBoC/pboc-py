@@ -150,7 +150,7 @@ class SimpleRepression(object):
     repressor.
     """
 
-    def __init__(self, R, ep_r, n_ns=4.6e6, **kwargs):
+    def __init__(self, R=None, ep_r=None, n_ns=4.6e6, **kwargs):
         r"""
         Instantiate the SimpleRepression object.
 
@@ -169,19 +169,39 @@ class SimpleRepression(object):
             kwargs for allosteric transcription factors see `MWC`
             documentation for more information.
         """
-        # Define the variables.
-        self.R = R
-        self.ep_r = ep_r
-        self.n_ns = n_ns
 
-        # Ensure values make sense.
+        # Ensure values are provided.
+        for k in [R, ep_r, n_ns]:
+            if k is None:
+                raise TypeError("{0} is None and must be defined.".format(k))
+
+        # Test input types
+        for arg in [R, ep_r, n_ns]:
+            if type(arg) in [int, float, np.float_, np.int_]:
+                pass
+            elif type(arg) in [pd.core.series.Series, np.ndarray]:
+                if arg.dtype not in [int, float]:
+                    raise TypeError("Argument {} is {}, but elements are not of type into or float.".format(arg, type(arg)))
+        
+            elif type(arg) == list:
+                if any([type(a) not in [int, float] for a in arg]):
+                    raise TypeError("Argument {} is list, but not all elements are not of type into or float.".format(arg))
+            else:
+                raise TypeError("Argument {} is {}, has to be either int, float or array")
+
+        # Ensure values are positive.
         positive_args = dict(R=R, n_ns=n_ns)
         for p in positive_args.keys():
             val = positive_args[p]
             if type(val) is float or int:
                 val = np.array([val])
             if (val < 0).any():
-                raise RuntimeError("{0} must be positive.".format(p))
+                raise ValueError("{0} must be positive.".format(p))
+
+        # Define the variables.
+        self.R = R
+        self.ep_r = ep_r
+        self.n_ns = n_ns
 
         # Determine if transcription factor is allosteric
         if kwargs:
