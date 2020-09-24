@@ -4,7 +4,7 @@ matplotlib
 bokeh
 scipy
 scikit-image
-glob
 seaborn
-sys
 altair
+fcsparser
+tqdm
