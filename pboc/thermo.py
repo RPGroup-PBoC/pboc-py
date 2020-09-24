@@ -45,7 +45,7 @@ class MWC(object):
 
         # Ensure values are provided.
         for k in kwargs.keys():
-            if type(kwargs[k]) is None:
+            if kwargs[k] is None:
                 raise RuntimeError("{0} is NoneType and must be defined.".format(k))
 
         # Assign the variables.
