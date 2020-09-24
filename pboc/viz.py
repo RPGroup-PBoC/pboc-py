@@ -1,22 +1,21 @@
+import numpy as np
+
 import bokeh.io
 import bokeh.plotting
 import bokeh.layouts
 import bokeh.palettes
-import skimage.io
-import skimage.measure
-import seaborn as sns
-import numpy as np
-import os
+import bokeh.themes
+
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.path import Path
 from matplotlib.patches import BoxStyle
 from matplotlib.offsetbox import AnchoredText
 import matplotlib
+import seaborn as sns
+
 import altair as alt
-import bokeh.themes
-import bokeh.io
-import altair as alt
+
 
 def despine(ax, offset=2):
     if (type(ax) != np.ndarray) & (type(ax) != list):
