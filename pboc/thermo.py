@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import scipy.optimize
 
+from .utils import is_number_array
+
 
 class MWC(object):
     r"""
@@ -53,15 +55,8 @@ class MWC(object):
         for arg in [ep_ai, ka, ki, effector_conc, n_sites]:
             if type(arg) in [int, float, np.float_, np.int_]:
                 pass
-            elif type(arg) in [pd.core.series.Series, np.ndarray]:
-                if arg.dtype not in [int, float]:
-                    raise TypeError("Argument {} is {}, but elements are not of type into or float.".format(arg, type(arg)))
-        
-            elif type(arg) == list:
-                if any([type(a) not in [int, float] for a in arg]):
-                    raise TypeError("Argument {} is list, but not all elements are not of type into or float.".format(arg))
             else:
-                raise TypeError("Argument {} is {}, has to be either int, float or array")
+                is_number_array(arg)
                 
 
         # Assign the variables.
@@ -179,15 +174,8 @@ class SimpleRepression(object):
         for arg in [R, ep_r, n_ns]:
             if type(arg) in [int, float, np.float_, np.int_]:
                 pass
-            elif type(arg) in [pd.core.series.Series, np.ndarray]:
-                if arg.dtype not in [int, float]:
-                    raise TypeError("Argument {} is {}, but elements are not of type into or float.".format(arg, type(arg)))
-        
-            elif type(arg) == list:
-                if any([type(a) not in [int, float] for a in arg]):
-                    raise TypeError("Argument {} is list, but not all elements are not of type into or float.".format(arg))
             else:
-                raise TypeError("Argument {} is {}, has to be either int, float or array")
+                is_number_array(arg) 
 
         # Ensure values are positive.
         positive_args = dict(R=R, n_ns=n_ns)
