@@ -9,3 +9,5 @@ altair
 fcsparser
 tqdm
 cmdstanpy
+arviz
+pickle
