@@ -1,5 +1,7 @@
 # `pboc-py`
 
+## Growth rate inference
+
 # License
 
 All creative work in this repository (text, images, etc) is licensed under a
