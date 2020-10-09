@@ -36,4 +36,32 @@ def test_model_sampling():
 
 
 def test_growth_rate_inference_inputs():
+    # Error for missing daa
+    with pytest.raises(RuntimeError):
+        t = [0.1, 0.2]
+        pboc.probabilistic.infer_growth_rate(time=t)
+
+    # Error for non number input
+    with pytest.raises(TypeError):
+        t = ["a", "b"]
+        OD = [0.1, 0.2]
+        pboc.probabilistic.infer_growth_rate(time=t, OD=OD)
+
+    with pytest.raises(TypeError):
+        OD = ["a", "b"]
+        t = [0.1, 0.2]
+        pboc.probabilistic.infer_growth_rate(time=t, OD=OD)
+
+    # Error for data of different lengths
+    with pytest.raises(RuntimeError):
+        OD = [1]
+        t = [0.1, 0.2]
+        pboc.probabilistic.infer_growth_rate(time=t, OD=OD)
+
+    
+
+
+
+    
+    return
 

@@ -3,6 +3,7 @@ import pandas as pd
 import pickle
 import os
 from pathlib import Path
+import warnings
 
 import cmdstanpy
 import arviz as az
@@ -88,8 +89,8 @@ class StanModel(object):
         )
 
 def infer_growth_rate(
-    time, 
-    OD, 
+    time=None, 
+    OD=None, 
     t_ppc=None,
     N_ppc=100,
     rho_param=[1000, 1000],
@@ -133,8 +134,14 @@ def infer_growth_rate(
     """
     
     # Verify  inputs
+    if (time is None) or (OD is None):
+        raise RuntimeError("Time series and OD series have to be given.")
+
     is_numbers_array(time, "time")
     is_numbers_array(OD, "OD")
+
+    if len(time) != len(OD):
+        raise RuntimeError("Length of time and OD series have to be equal.")
 
     for arg, name in zip([rho_param, alpha_param, sigma_param], ["rho_param", "alpha_param", "sigma_param"]):
         if arg != None:
@@ -180,8 +187,8 @@ def infer_growth_rate(
     if to_df:
         entries = chains * draws * N_ppc
         if entries >= 5 * 10**5:
-            print("You chose to return a dataframe. This might take a while, and the dataframe is pretty large.")
-            print("More than 500000 rows. Consider working with the arviz object.")
+            warnings.warn("You chose to return a dataframe. This might take a while, and the dataframe is pretty large.")
+            warnings.warn("More than 500000 rows. Consider working with the arviz object.")
         return _gr_inference_to_df(intermediate, t_ppc, chains, draws)
     else:
         return intermediate
