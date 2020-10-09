@@ -7,27 +7,29 @@ import sys
 sys.path.insert(0, '../')
 import pboc.probabilistic
 
+local_path = __file__.split("test_probabilistic.py")[0]
+
 def test_model_loading():
     # Clean up
-    if os.path.isfile('tests/stan/bernoulli'):
-        os.remove("tests/stan/bernoulli")
-    if os.path.isfile('tests/stan/bernoulli.hpp'):
-        os.remove("tests/stan/bernoulli.hpp")
-    if os.path.isfile('tests/stan/bernoulli.pkl'):
-        os.remove("tests/stan/bernoulli.pkl")
+    if os.path.isfile(local_path + 'stan/bernoulli'):
+        os.remove(local_path + "stan/bernoulli")
+    if os.path.isfile(local_path + 'stan/bernoulli.hpp'):
+        os.remove(local_path + "stan/bernoulli.hpp")
+    if os.path.isfile(local_path + 'stan/bernoulli.pkl'):
+        os.remove(local_path + "stan/bernoulli.pkl")
     
 
     # Create model
-    model = pboc.probabilistic.StanModel("tests/stan/bernoulli.stan")
+    model = pboc.probabilistic.StanModel(local_path + "stan/bernoulli.stan")
     # Test implicit import of precompiled model
-    model = pboc.probabilistic.StanModel("tests/stan/bernoulli.stan")
+    model = pboc.probabilistic.StanModel(local_path + "stan/bernoulli.stan")
     # Test explicit import of precompiled model
-    model = pboc.probabilistic.StanModel("tests/stan/bernoulli.pkl")
+    model = pboc.probabilistic.StanModel(local_path + "stan/bernoulli.pkl")
 
 
 def test_model_sampling():
     # Load model
-    model = pboc.probabilistic.StanModel("tests/stan/bernoulli.pkl")
+    model = pboc.probabilistic.StanModel(local_path + "stan/bernoulli.pkl")
     model.data = {
         "N" : 10,
         "y" : [0,1,0,0,0,0,0,0,0,1]
