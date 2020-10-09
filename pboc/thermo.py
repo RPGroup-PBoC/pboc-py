@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import scipy.optimize
 
-from .utils import is_number_array
+from .utils import is_numbers_array
 
 
 class MWC(object):
@@ -52,11 +52,11 @@ class MWC(object):
                 raise TypeError("{0} is None and must be defined.".format(k))
 
         # Test input types
-        for arg in [ep_ai, ka, ki, effector_conc, n_sites]:
+        for arg, name in zip([ep_ai, ka, ki, effector_conc, n_sites], ["ep_ai", "ka", "ki", "effector_conc", "n_sites"]):
             if type(arg) in [int, float, np.float_, np.int_]:
                 pass
             else:
-                is_number_array(arg)
+                is_numbers_array(arg, name)
                 
 
         # Assign the variables.
@@ -171,11 +171,11 @@ class SimpleRepression(object):
                 raise TypeError("{0} is None and must be defined.".format(k))
 
         # Test input types
-        for arg in [R, ep_r, n_ns]:
+        for arg, name in zip([R, ep_r, n_ns], ["R", "ep_r", "n_ns"]):
             if type(arg) in [int, float, np.float_, np.int_]:
                 pass
             else:
-                is_number_array(arg) 
+                is_numbers_array(arg, name) 
 
         # Ensure values are positive.
         positive_args = dict(R=R, n_ns=n_ns)
