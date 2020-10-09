@@ -21,3 +21,4 @@
 # Stan stuff
 *.hpp
 */bernoulli
+*/gp_growth_rate

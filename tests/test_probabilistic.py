@@ -9,9 +9,13 @@ import pboc.probabilistic
 
 def test_model_loading():
     # Clean up
-    os.remove("tests/stan/bernoulli")
-    os.remove("tests/stan/bernoulli.hpp")
-    os.remove("tests/stan/bernoulli.pkl")
+    if os.path.isfile('tests/stan/bernoulli'):
+        os.remove("tests/stan/bernoulli")
+    if os.path.isfile('tests/stan/bernoulli.hpp'):
+        os.remove("tests/stan/bernoulli.hpp")
+    if os.path.isfile('tests/stan/bernoulli.pkl'):
+        os.remove("tests/stan/bernoulli.pkl")
+    
 
     # Create model
     model = pboc.probabilistic.StanModel("tests/stan/bernoulli.stan")
@@ -29,4 +33,7 @@ def test_model_sampling():
         "y" : [0,1,0,0,0,0,0,0,0,1]
         }
     model.sample()
-    
+
+
+def test_growth_rate_inference_inputs():
+
