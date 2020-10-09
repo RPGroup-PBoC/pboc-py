@@ -10,6 +10,9 @@ install:
   - pip install -r requirements.txt
   - pip install .
 
+before_script:
+- install_cmdstan
+
 # command to run tests
 script:
   - pytest
