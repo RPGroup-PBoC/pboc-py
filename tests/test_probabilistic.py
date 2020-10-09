@@ -29,7 +29,7 @@ def test_model_loading():
 
 def test_model_sampling():
     # Load model
-    model = pboc.probabilistic.StanModel(local_path + "stan/bernoulli.pkl")
+    model = pboc.probabilistic.StanModel(local_path + "stan/bernoulli.stan")
     model.data = {
         "N" : 10,
         "y" : [0,1,0,0,0,0,0,0,0,1]
