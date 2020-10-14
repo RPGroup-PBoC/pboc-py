@@ -6,7 +6,11 @@ import skimage.segmentation
 import skimage.feature
 import scipy.ndimage
 import pandas as pd
-from mwc.image import projection, generate_flatfield, correct_drift
+
+import sys
+sys.path.insert(0, '../')
+from pboc.image import projection, generate_flatfield, correct_drift
+
 import pytest
 
 
