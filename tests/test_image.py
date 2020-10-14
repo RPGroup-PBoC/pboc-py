@@ -9,7 +9,7 @@ import pandas as pd
 
 import sys
 sys.path.insert(0, '../')
-from pboc.image import projection, generate_flatfield, correct_drift
+from pboc.image import projection, generate_flatfield#, correct_drift
 
 import pytest
 
