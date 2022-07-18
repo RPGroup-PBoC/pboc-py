@@ -15,12 +15,12 @@ It is under development and is not yet ready for use.
 
 # from . import mcmc
 from . import viz
-from . import flow
-from . import image
-from . import stats
-from . import thermo
-from . import probabilistic
+#from . import flow
+#from . import image
+#from . import stats
+#from . import thermo
+#from . import probabilistic
 
-__author__ = """Griffin Chure"""
-__email__ = """griffinchure@gmail.com"""
-__version__ = "0.0.0"
+__author__ = """Tom Roeschinger, Griffin Chure"""
+__email__ = """troeschi@caltech.edu"""
+__version__ = "0.0.1"
